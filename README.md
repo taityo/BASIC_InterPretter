@@ -1,0 +1,2 @@
+# Ore_no_BASIC_InterPreter_wo_MIRO-
+俺のインtqプリtくょり優秀ンおあrン
