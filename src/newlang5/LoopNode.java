@@ -21,8 +21,8 @@ public class LoopNode extends Node {
 	 * 4, <DO> <NL> <stmt_list> <LOOP> <UNTIL> <cond> <NL>
 	 */
 	int processType = -1;
-	int cond_num[] = {0, 0, 0, 1, 1};
-	int stmtList_num[] = {1, 1,1,0,0};
+	int cond_num[] = { 0, 0, 0, 1, 1 };
+	int stmtList_num[] = { 1, 1, 1, 0, 0 };
 
 	private LoopNode(Environment e) {
 		super(e);
@@ -240,7 +240,7 @@ public class LoopNode extends Node {
 		return true;
 	}
 
-	public String toString(){
+	public String toString() {
 		String res = "LOOP["
 				+ nodeList.get(cond_num[processType]).toString()
 				+ "[" + nodeList.get(stmtList_num[processType]).toString()
@@ -251,28 +251,28 @@ public class LoopNode extends Node {
 
 	public Value getValue() {
 
-		while(true) {
+		while (true) {
 			boolean cond = false;
-			if(processType <= 2) {
+			if (processType <= 2) {
 				cond = nodeList.get(cond_num[processType]).getValue().getBValue();
 
-				if(processType <= 1 && !cond) {
+				if (processType <= 1 && !cond) {
 					break;
 				}
-				if(processType == 2 && cond){
+				if (processType == 2 && cond) {
 					break;
 				}
 			}
 
 			nodeList.get(stmtList_num[processType]).getValue();
 
-			if(processType >= 3) {
+			if (processType >= 3) {
 				cond = nodeList.get(cond_num[processType]).getValue().getBValue();
 
-				if(processType == 3 && !cond) {
+				if (processType == 3 && !cond) {
 					break;
 				}
-				if(processType == 4 && cond) {
+				if (processType == 4 && cond) {
 					break;
 				}
 			}

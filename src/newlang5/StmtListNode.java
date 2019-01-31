@@ -36,17 +36,18 @@ public class StmtListNode extends Node {
 			lu = env.getInput().get();
 			if (StmtNode.isMatch(lu.getType())) {
 				handler = StmtNode.getHandler(lu.getType(), env);
-			}else if (BlockNode.isMatch(lu.getType())) {
+			} else if (BlockNode.isMatch(lu.getType())) {
 				handler = BlockNode.getHandler(lu.getType(), env);
-			}else if(lu.getType() == LexicalType.NL){
+			} else if (lu.getType() == LexicalType.NL) {
 				continue;
-			}else{
+			} else {
 
-				if(BlockNode.isEnd(lu.getType()) || ForNode.isEnd(lu.getType())) {
+				if (BlockNode.isEnd(lu.getType()) || ForNode.isEnd(lu.getType())) {
 					env.getInput().unget(lu);
 					return true;
 				}
-				if(lu.getType() == LexicalType.EOF)break;
+				if (lu.getType() == LexicalType.EOF)
+					break;
 
 				System.out.println("StmtListNode Error");
 				return false;
@@ -55,23 +56,24 @@ public class StmtListNode extends Node {
 			child.add(handler);
 			env.getInput().unget(lu);
 
-			if(!handler.Parse()) {
+			if (!handler.Parse()) {
 				System.out.println("StmtListNode Error");
 				return false;
 			}
 
 			//ENDだったら終了
-			if(lu.getType() == LexicalType.END)break;
+			if (lu.getType() == LexicalType.END)
+				break;
 
 		}
 
 		return true;
 	}
 
-	public String toString(){
+	public String toString() {
 		String str = "";
 
-		for(int i = 0;i < child.size();i++) {
+		for (int i = 0; i < child.size(); i++) {
 			str += child.get(i).toString();
 		}
 
@@ -80,7 +82,7 @@ public class StmtListNode extends Node {
 
 	public Value getValue() {
 
-		for(int i = 0;i < child.size();i++){
+		for (int i = 0; i < child.size(); i++) {
 			child.get(i).getValue();
 		}
 

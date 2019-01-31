@@ -13,7 +13,7 @@ public class ValueImpl implements Value {
 		this.type = targetType;
 
 		//System.out.println("value imple start");
-		switch(targetType) {
+		switch (targetType) {
 		case INTEGER:
 			//System.out.println("integer");
 			svalue = src;
@@ -25,17 +25,17 @@ public class ValueImpl implements Value {
 			//System.out.println("double");
 			svalue = src;
 			dvalue = Double.valueOf(src);
-			ivalue = (int)dvalue;
+			ivalue = (int) dvalue;
 			bvalue = this.dvalue != 0;
 			break;
 		case STRING:
 			//System.out.println("string");
 			svalue = src;
-			if(svalue.equals("")) {
+			if (svalue.equals("")) {
 				ivalue = 0;
 				dvalue = 0.0;
 				bvalue = false;
-			}else {
+			} else {
 				ivalue = 1;
 				dvalue = 1.0;
 				bvalue = true;
@@ -44,15 +44,17 @@ public class ValueImpl implements Value {
 		case BOOL:
 			//System.out.println("bool");
 			bvalue = Boolean.valueOf(src);
-			if(bvalue) {
+			if (bvalue) {
 				ivalue = 1;
 				dvalue = 1.0;
 				svalue = "TRUE";
-			}else {
+			} else {
 				ivalue = 0;
 				dvalue = 0.0;
 				svalue = "FALSE";
 			}
+			break;
+		default:
 			break;
 		}
 

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ForNode extends Node{
+public class ForNode extends Node {
 
 	static Set<LexicalType> first = new HashSet<LexicalType>(
 			Arrays.asList(LexicalType.FOR));
@@ -38,103 +38,103 @@ public class ForNode extends Node{
 
 		//forの解析
 		lu = env.getInput().get();
-		if(lu.getType() == LexicalType.FOR) {
+		if (lu.getType() == LexicalType.FOR) {
 			forUnit = lu;
-		}else {
+		} else {
 			System.out.println("ForNode Error");
 			return false;
 		}
 
 		//substの解析
 		lu = env.getInput().get();
-		if(SubstNode.isMatch(lu.getType())) {
+		if (SubstNode.isMatch(lu.getType())) {
 			subst = SubstNode.getHandler(lu.getType(), env);
 			env.getInput().unget(lu);
-		}else {
+		} else {
 			System.out.println("ForNode Error");
 			return false;
 		}
-		if(!subst.Parse()) {
+		if (!subst.Parse()) {
 			System.out.println("ForNode Error");
 			return false;
 		}
 
 		//toの解析
 		lu = env.getInput().get();
-		if(lu.getType() == LexicalType.TO) {
+		if (lu.getType() == LexicalType.TO) {
 			toUnit = lu;
-		}else {
+		} else {
 			System.out.println("ForNode Error");
 			return false;
 		}
 
 		//exprの解析
 		lu = env.getInput().get();
-		if(ExprNode.isMatch(lu.getType())) {
+		if (ExprNode.isMatch(lu.getType())) {
 			handler = ExprNode.getHandler(lu.getType(), env);
 			expr = handler;
 			env.getInput().unget(lu);
-		}else {
+		} else {
 			System.out.println("SubstNode Error");
 			return false;
 		}
-		if(!expr.Parse()) {
+		if (!expr.Parse()) {
 			System.out.println("ForNode Error");
 			return false;
 		}
 
 		//stepの解析
 		lu = env.getInput().get();
-		if(lu.getType() == LexicalType.STEP) {
+		if (lu.getType() == LexicalType.STEP) {
 			stepUnit = lu;
-		}else {
+		} else {
 			System.out.println("ForNode Error");
 			return false;
 		}
 
 		//expr2(増量)の解析
 		lu = env.getInput().get();
-		if(ExprNode.isMatch(lu.getType())) {
+		if (ExprNode.isMatch(lu.getType())) {
 			handler = ExprNode.getHandler(lu.getType(), env);
 			expr2 = handler;
 			env.getInput().unget(lu);
-		}else {
+		} else {
 			System.out.println("SubstNode Error");
 			return false;
 		}
-		if(!expr2.Parse()) {
+		if (!expr2.Parse()) {
 			System.out.println("SubstNode Error");
 			return false;
 		}
 
 		//stmt_listの解析
 		lu = env.getInput().get();
-		if(StmtListNode.isMatch(lu.getType())) {
+		if (StmtListNode.isMatch(lu.getType())) {
 			stmt_list = StmtListNode.getHandler(lu.getType(), env);
 			env.getInput().unget(lu);
-		}else {
+		} else {
 			System.out.println("ForNode Error");
 			return false;
 		}
-		if(!stmt_list.Parse()) {
+		if (!stmt_list.Parse()) {
 			System.out.println("ForNode Error");
 			return false;
 		}
 
 		//nextの解析
 		lu = env.getInput().get();
-		if(lu.getType() == LexicalType.NEXT) {
+		if (lu.getType() == LexicalType.NEXT) {
 			nextUnit = lu;
-		}else {
+		} else {
 			System.out.println("ForNode Error");
 			return false;
 		}
 
 		//NAMEの解析
 		lu = env.getInput().get();
-		if(lu.getType() == LexicalType.NAME) {
+		if (lu.getType() == LexicalType.NAME) {
 			name = lu;
-		}else {
+		} else {
 			System.out.println("ForNode Error");
 			return false;
 		}
@@ -142,8 +142,8 @@ public class ForNode extends Node{
 		return true;
 	}
 
-	public String toString(){
-		String str = "FOR[TO[" +  subst.toString() + ":"
+	public String toString() {
+		String str = "FOR[TO[" + subst.toString() + ":"
 				+ expr.toString() + ":" + expr2.toString() + "][" + stmt_list.toString()
 				+ "]]";
 		return str;
@@ -154,9 +154,9 @@ public class ForNode extends Node{
 		int start = subst.getValue().getIValue();
 		int end = expr.getValue().getIValue();
 		int gain = expr2.getValue().getIValue();
-		Variable v = this.env.getVariable(((SubstNode)subst).name.getValue().getSValue());
+		Variable v = this.env.getVariable(((SubstNode) subst).name.getValue().getSValue());
 
-		for(int i = start;i != end;i += gain) {
+		for (int i = start; i != end; i += gain) {
 			Value value = new ValueImpl(Integer.toString(i), ValueType.INTEGER);
 			v.setValue(value);
 			stmt_list.getValue();

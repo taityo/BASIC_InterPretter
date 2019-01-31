@@ -99,6 +99,8 @@ public class LexicalUnit {
 	    	return ("ENDIF");
 		case DO:
 			return ("DO");
+		default:
+			break;
 	    }
 	    return "";
 	}

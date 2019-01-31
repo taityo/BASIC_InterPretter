@@ -9,16 +9,16 @@ public class LexicalUnit {
 	public LexicalUnit(LexicalType this_type) {
 	    type = this_type;
 	}
-	
+
 	public LexicalUnit(LexicalType this_type, Value this_value) {
 		type = this_type;
 		value = this_value;
 	}
-	
+
 	public Value getValue() {
 		return value;
 	}
-	
+
 	public LexicalType getType() {
 		return type;
 	}
@@ -103,6 +103,8 @@ public class LexicalUnit {
 	    	return ("NE");
 	    case ENDIF:
 	    	return ("ENDIF");
+		default:
+			break;
 	    }
 	    return "";
 	}

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ExprListNode extends Node{
+public class ExprListNode extends Node {
 
 	static Set<LexicalType> first = new HashSet<LexicalType>(
 			Arrays.asList(LexicalType.LP, LexicalType.SUB, LexicalType.NAME,
@@ -29,41 +29,40 @@ public class ExprListNode extends Node{
 
 	public boolean Parse() throws Exception {
 		LexicalUnit lu;
-		Node handler = null;
 
 		//exprの解析
 		lu = env.getInput().get();
-		if(ExprNode.isMatch(lu.getType())) {
+		if (ExprNode.isMatch(lu.getType())) {
 			expr = ExprNode.getHandler(lu.getType(), env);
 			env.getInput().unget(lu);
-		}else {
+		} else {
 			System.out.println("ExprListNode Error");
 			return false;
 		}
-		if(!expr.Parse()) {
+		if (!expr.Parse()) {
 			System.out.println("ExprListNode Error");
 			return false;
 		}
 
 		//コンマの解析
 		lu = env.getInput().get();
-		if(lu.getType() == LexicalType.COMMA) {
+		if (lu.getType() == LexicalType.COMMA) {
 			comma = lu;
-		}else {
+		} else {
 			env.getInput().unget(lu);
 			return true;
 		}
 
 		//expr_listの解析
 		lu = env.getInput().get();
-		if(ExprListNode.isMatch(lu.getType())){
+		if (ExprListNode.isMatch(lu.getType())) {
 			expr_list = ExprListNode.getHandler(lu.getType(), env);
 			env.getInput().unget(lu);
-		}else {
+		} else {
 			System.out.println("ExprListNode Error");
 			return false;
 		}
-		if(!expr_list.Parse()) {
+		if (!expr_list.Parse()) {
 			System.out.println("ExprListNode Error");
 			return false;
 		}
@@ -71,10 +70,10 @@ public class ExprListNode extends Node{
 		return true;
 	}
 
-	public String toString(){
+	public String toString() {
 		String res = expr.toString();
 
-		if(comma != null) {
+		if (comma != null) {
 			res += "," + expr_list.toString();
 		}
 
@@ -84,11 +83,11 @@ public class ExprListNode extends Node{
 	public Value getValue() {
 		ValueList list;
 
-		if(comma == null) {
+		if (comma == null) {
 			list = new ValueList();
 			list.addElement(expr.getValue());
-		}else {
-			list = (ValueList)expr_list.getValue();
+		} else {
+			list = (ValueList) expr_list.getValue();
 			list.addTop(expr.getValue());
 		}
 

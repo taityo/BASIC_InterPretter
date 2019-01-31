@@ -197,7 +197,6 @@ public class LexicalAnalyzerImple implements LexicalAnalyzer {
 
 		String target = "";
 		LexicalType this_type;
-		ValueType this_value_type;
 
 		while (true) {
 
@@ -237,7 +236,6 @@ public class LexicalAnalyzerImple implements LexicalAnalyzer {
 
 		String target = "";
 		LexicalType this_type;
-
 
 		//シンボルの時は必ずpushback readerから値を取り出す
 		int ci = this.pushback.read();

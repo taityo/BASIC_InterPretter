@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SubstNode extends Node{
+public class SubstNode extends Node {
 
 	static Set<LexicalType> first = new HashSet<LexicalType>(
 			Arrays.asList(LexicalType.NAME));
@@ -33,41 +33,41 @@ public class SubstNode extends Node{
 
 		//変数の解析
 		lu = env.getInput().get();
-		if(lu.getType() == LexicalType.NAME) {
+		if (lu.getType() == LexicalType.NAME) {
 			name = lu;
-		}else {
+		} else {
 			System.out.println("SubstNode Error");
 			return false;
 		}
 
 		//=の解析
 		lu = env.getInput().get();
-		if(lu.getType() == LexicalType.EQ) {
+		if (lu.getType() == LexicalType.EQ) {
 			eq = lu;
-		}else {
+		} else {
 			System.out.println("SubstNode Error");
 			return false;
 		}
 
 		//exprの解析
 		lu = env.getInput().get();
-		if(ExprNode.isMatch(lu.getType())) {
+		if (ExprNode.isMatch(lu.getType())) {
 			handler = ExprNode.getHandler(lu.getType(), env);
 			expr = handler;
 			env.getInput().unget(lu);
-		}else {
+		} else {
 			System.out.println("SubstNode Error");
 			return false;
 		}
-		if(handler.Parse()) {
+		if (handler.Parse()) {
 			return true;
-		}else {
+		} else {
 			System.out.println("SubstNode Error");
 			return false;
 		}
 	}
 
-	public String toString(){
+	public String toString() {
 		return name.getValue().getSValue() + "[" + expr.toString() + "]";
 	}
 

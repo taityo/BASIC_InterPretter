@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class EndNode extends Node{
+public class EndNode extends Node {
 	static Set<LexicalType> first = new HashSet<LexicalType>(
 			Arrays.asList(LexicalType.END));
 	LexicalUnit end;
@@ -32,7 +32,7 @@ public class EndNode extends Node{
 		return true;
 	}
 
-	public String toString(){
+	public String toString() {
 		return "END";
 	}
 }

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BlockNode extends Node{
+public class BlockNode extends Node {
 
 	Node child;
 	static Set<LexicalType> first = new HashSet<LexicalType>(
@@ -13,7 +13,7 @@ public class BlockNode extends Node{
 			Arrays.asList(LexicalType.LOOP, LexicalType.WEND, LexicalType.ELSE,
 					LexicalType.ELSEIF, LexicalType.ENDIF));
 
-	private BlockNode(Environment e){
+	private BlockNode(Environment e) {
 		super(e);
 		type = NodeType.BLOCK;
 	}
@@ -27,7 +27,8 @@ public class BlockNode extends Node{
 	}
 
 	static Node getHandler(LexicalType t, Environment e) {
-		if(!first.contains(t))return null;
+		if (!first.contains(t))
+			return null;
 		return new BlockNode(e);
 	}
 
@@ -39,19 +40,19 @@ public class BlockNode extends Node{
 		if (IFNode.isMatch(lu.getType())) {
 			handler = IFNode.getHandler(lu.getType(), env);
 
-		}else if(LoopNode.isMatch(lu.getType())) {
+		} else if (LoopNode.isMatch(lu.getType())) {
 			handler = LoopNode.getHandler(lu.getType(), env);
 
-		}else {
+		} else {
 			System.out.println("BlockNode Error");
 			return false;
 		}
 
 		child = handler;
 		env.getInput().unget(lu);
-		if(handler.Parse()) {
+		if (handler.Parse()) {
 			return true;
-		}else {
+		} else {
 			System.out.println("BlockNode Error");
 			return false;
 		}

@@ -205,7 +205,6 @@ public class LexicalAnalyzerImpl implements LexicalAnalyzer {
 
 		String target = "";
 		LexicalType this_type;
-		ValueType this_value_type;
 
 		while (true) {
 

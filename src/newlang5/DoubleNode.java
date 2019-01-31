@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DoubleNode extends Node{
+public class DoubleNode extends Node {
 	static Set<LexicalType> first = new HashSet<LexicalType>(
 			Arrays.asList(LexicalType.DOUBLEVAL));
 	LexicalUnit doubleval;
@@ -28,16 +28,16 @@ public class DoubleNode extends Node{
 		LexicalUnit lu;
 		lu = env.getInput().get();
 
-		if(lu.getType() == LexicalType.DOUBLEVAL) {
+		if (lu.getType() == LexicalType.DOUBLEVAL) {
 			doubleval = lu;
-		}else {
+		} else {
 			return false;
 		}
 
 		return true;
 	}
 
-	public String toString(){
+	public String toString() {
 		return doubleval.getValue().getSValue();
 	}
 

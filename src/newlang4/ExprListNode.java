@@ -29,7 +29,6 @@ public class ExprListNode extends Node{
 
 	public boolean Parse() throws Exception {
 		LexicalUnit lu;
-		Node handler = null;
 
 		//exprの解析
 		lu = env.getInput().get();

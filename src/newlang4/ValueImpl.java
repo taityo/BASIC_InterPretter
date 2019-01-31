@@ -54,6 +54,8 @@ public class ValueImpl implements Value {
 				svalue = "FALSE";
 			}
 			break;
+		default:
+			break;
 		}
 
 		//System.out.println("end");

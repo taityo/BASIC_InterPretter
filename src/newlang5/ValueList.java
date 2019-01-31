@@ -3,8 +3,8 @@ package newlang5;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ValueList extends ValueImpl{
-	List<Value>valueList = new ArrayList<Value>();
+public class ValueList extends ValueImpl {
+	List<Value> valueList = new ArrayList<Value>();
 
 	public ValueList(String src, ValueType targetType) {
 		super(src, targetType);

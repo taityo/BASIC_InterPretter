@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BoolNode extends Node{
+public class BoolNode extends Node {
 	static Set<LexicalType> first = new HashSet<LexicalType>(
 			Arrays.asList(LexicalType.BOOLVAL));
 	LexicalUnit boolval;
@@ -28,16 +28,16 @@ public class BoolNode extends Node{
 		LexicalUnit lu;
 		lu = env.getInput().get();
 
-		if(lu.getType() == LexicalType.BOOLVAL) {
+		if (lu.getType() == LexicalType.BOOLVAL) {
 			boolval = lu;
-		}else {
+		} else {
 			return false;
 		}
 
 		return true;
 	}
 
-	public String toString(){
+	public String toString() {
 		return boolval.getValue().getSValue();
 	}
 

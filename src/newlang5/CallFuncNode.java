@@ -54,7 +54,7 @@ public class CallFuncNode extends Node {
 			env.getInput().unget(lu);
 
 			//解析
-			if(!expr_list.Parse()) {
+			if (!expr_list.Parse()) {
 				System.out.println("CallFuncNode Error");
 				return false;
 			}
@@ -109,7 +109,7 @@ public class CallFuncNode extends Node {
 		Value value_list = this.expr_list.getValue();
 
 		//関数の実行
-		func.invoke((ValueList)value_list);
+		func.invoke((ValueList) value_list);
 
 		return null;
 	}

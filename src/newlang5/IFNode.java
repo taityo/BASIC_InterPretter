@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class IFNode extends Node{
+public class IFNode extends Node {
 
 	static Set<LexicalType> first = new HashSet<LexicalType>(
 			Arrays.asList(LexicalType.IF));
@@ -21,7 +21,7 @@ public class IFNode extends Node{
 	 */
 	int processType = -1;
 
-	private IFNode(Environment e){
+	private IFNode(Environment e) {
 		super(e);
 	}
 
@@ -30,7 +30,8 @@ public class IFNode extends Node{
 	}
 
 	static Node getHandler(LexicalType t, Environment e) {
-		if(!first.contains(t))return null;
+		if (!first.contains(t))
+			return null;
 		return new IFNode(e);
 	}
 
@@ -41,22 +42,22 @@ public class IFNode extends Node{
 		//ifの解析
 		lu = env.getInput().get();
 		unitList.add(lu);
-		if(lu.getType() != LexicalType.IF) {
+		if (lu.getType() != LexicalType.IF) {
 			System.out.println("IFNode Error");
 			return false;
 		}
 
 		//condの解析
 		lu = env.getInput().get();
-		if(CondNode.isMatch(lu.getType())) {
+		if (CondNode.isMatch(lu.getType())) {
 			handler = CondNode.getHandler(lu.getType(), env);
 			nodeList.add(handler);
 			env.getInput().unget(lu);
-		}else {
+		} else {
 			System.out.println("IFNode Error");
 			return false;
 		}
-		if(!handler.Parse()) {
+		if (!handler.Parse()) {
 			System.out.println("IFNode Error");
 			return false;
 		}
@@ -64,54 +65,54 @@ public class IFNode extends Node{
 		//thenの解析
 		lu = env.getInput().get();
 		unitList.add(lu);
-		if(lu.getType() != LexicalType.THEN) {
+		if (lu.getType() != LexicalType.THEN) {
 			System.out.println("IFNode Error");
 			return false;
 		}
 
 		//stmtの解析
 		lu = env.getInput().get();
-		if(lu.getType() != LexicalType.NL) {
+		if (lu.getType() != LexicalType.NL) {
 
-			if(StmtNode.isMatch(lu.getType())) {
+			if (StmtNode.isMatch(lu.getType())) {
 				handler = StmtNode.getHandler(lu.getType(), env);
 				nodeList.add(handler);
 				env.getInput().unget(lu);
-			}else {
+			} else {
 				System.out.println("IFNode Error");
 				return false;
 			}
-			if(!handler.Parse()) {
+			if (!handler.Parse()) {
 				System.out.println("IFNode Error");
 				return false;
 			}
 			nodeList.add(handler);
 
-		}else {
+		} else {
 			unitList.add(lu);
 			processType = 2;
 		}
 
 		lu = env.getInput().get();
-		if(processType < 0) {
+		if (processType < 0) {
 			unitList.add(lu);
-			if(lu.getType() == LexicalType.NL) {
+			if (lu.getType() == LexicalType.NL) {
 				processType = 0;
 
-			}else if(lu.getType() == LexicalType.ELSE) {
+			} else if (lu.getType() == LexicalType.ELSE) {
 				processType = 1;
 
 				//stmtの解析
 				lu = env.getInput().get();
-				if(StmtNode.isMatch(lu.getType())) {
+				if (StmtNode.isMatch(lu.getType())) {
 					handler = StmtNode.getHandler(lu.getType(), env);
 					nodeList.add(handler);
 					env.getInput().unget(lu);
-				}else {
+				} else {
 					System.out.println("IFNode Error");
 					return false;
 				}
-				if(!handler.Parse()) {
+				if (!handler.Parse()) {
 					System.out.println("IFNode Error");
 					return false;
 				}
@@ -119,60 +120,60 @@ public class IFNode extends Node{
 				//nlの解析
 				lu = env.getInput().get();
 				unitList.add(lu);
-				if(lu.getType() != LexicalType.NL) {
+				if (lu.getType() != LexicalType.NL) {
 					System.out.println("IFNode Error");
 					return false;
 				}
-			}else {
+			} else {
 				System.out.println("IFNode Error");
 				return false;
 			}
 
-		}else {
+		} else {
 			//processType = 2の場合
 
 			//stmt_listの解析
-			if(StmtListNode.isMatch(lu.getType())) {
+			if (StmtListNode.isMatch(lu.getType())) {
 				handler = StmtListNode.getHandler(lu.getType(), env);
 				nodeList.add(handler);
 				env.getInput().unget(lu);
-			}else {
+			} else {
 				System.out.println("IFNode Error");
 				return false;
 			}
-			if(!handler.Parse()) {
+			if (!handler.Parse()) {
 				System.out.println("IFNode Error");
 				return false;
 			}
 
 			//else ifを無限に解析
 			//end ifが来るまで
-			while(true) {
+			while (true) {
 
 				lu = env.getInput().get();
 				unitList.add(lu);
-				if(lu.getType() == LexicalType.ELSE) {
+				if (lu.getType() == LexicalType.ELSE) {
 					//elseの時の処理
 
 					//nlの解析
 					lu = env.getInput().get();
 					unitList.add(lu);
-					if(lu.getType() != LexicalType.NL) {
+					if (lu.getType() != LexicalType.NL) {
 						System.out.println("IFNode Error");
 						return false;
 					}
 
 					//stmt_listの解析
 					lu = env.getInput().get();
-					if(StmtListNode.isMatch(lu.getType())) {
+					if (StmtListNode.isMatch(lu.getType())) {
 						handler = StmtListNode.getHandler(lu.getType(), env);
 						nodeList.add(handler);
 						env.getInput().unget(lu);
-					}else {
+					} else {
 						System.out.println("IFNode Error");
 						return false;
 					}
-					if(!handler.Parse()) {
+					if (!handler.Parse()) {
 						System.out.println("IFNode Error");
 						return false;
 					}
@@ -186,20 +187,20 @@ public class IFNode extends Node{
 					}*/
 
 					break;
-				}else if(lu.getType() == LexicalType.ELSEIF) {
+				} else if (lu.getType() == LexicalType.ELSEIF) {
 					//else ifの時の処理
 
 					//condの解析
 					lu = env.getInput().get();
-					if(CondNode.isMatch(lu.getType())) {
+					if (CondNode.isMatch(lu.getType())) {
 						handler = CondNode.getHandler(lu.getType(), env);
 						nodeList.add(handler);
 						env.getInput().unget(lu);
-					}else {
+					} else {
 						System.out.println("IFNode Error");
 						return false;
 					}
-					if(!handler.Parse()) {
+					if (!handler.Parse()) {
 						System.out.println("IFNode Error");
 						return false;
 					}
@@ -207,7 +208,7 @@ public class IFNode extends Node{
 					//thenの解析
 					lu = env.getInput().get();
 					unitList.add(lu);
-					if(lu.getType() != LexicalType.THEN) {
+					if (lu.getType() != LexicalType.THEN) {
 						System.out.println("IFNode Error");
 						return false;
 					}
@@ -215,22 +216,22 @@ public class IFNode extends Node{
 					//nlの解析
 					lu = env.getInput().get();
 					unitList.add(lu);
-					if(lu.getType() != LexicalType.NL) {
+					if (lu.getType() != LexicalType.NL) {
 						System.out.println("IFNode Error");
 						return false;
 					}
 
 					//stmt_listの解析
 					lu = env.getInput().get();
-					if(StmtListNode.isMatch(lu.getType())) {
+					if (StmtListNode.isMatch(lu.getType())) {
 						handler = StmtListNode.getHandler(lu.getType(), env);
 						nodeList.add(handler);
 						env.getInput().unget(lu);
-					}else {
+					} else {
 						System.out.println("IFNode Error");
 						return false;
 					}
-					if(!handler.Parse()) {
+					if (!handler.Parse()) {
 						System.out.println("IFNode Error");
 						return false;
 					}
@@ -241,7 +242,7 @@ public class IFNode extends Node{
 						System.out.println("IFNode Error");
 						return false;
 					}*/
-				}else {
+				} else {
 					System.out.println("IFNode Error");
 					return false;
 				}
@@ -251,7 +252,7 @@ public class IFNode extends Node{
 			//endifの解析
 			lu = env.getInput().get();
 			unitList.add(lu);
-			if(lu.getType() != LexicalType.ENDIF) {
+			if (lu.getType() != LexicalType.ENDIF) {
 				System.out.println("IFNode Error");
 				return false;
 			}
@@ -259,7 +260,7 @@ public class IFNode extends Node{
 			//nlの解析
 			lu = env.getInput().get();
 			unitList.add(lu);
-			if(lu.getType() != LexicalType.NL) {
+			if (lu.getType() != LexicalType.NL) {
 				System.out.println("IFNode Error");
 				return false;
 			}
@@ -271,33 +272,33 @@ public class IFNode extends Node{
 	public String toString() {
 		String res = null;
 
-		if(processType == 0) {
+		if (processType == 0) {
 			res = "IF[" + nodeList.get(0).toString()
 					+ "[" + nodeList.get(1).toString() + "]]";
 		}
 
-		if(processType == 1) {
+		if (processType == 1) {
 			res = "IF[" + nodeList.get(0).toString()
 					+ "[" + nodeList.get(1).toString() + "]]"
 					+ "ELSE [" + nodeList.get(3).toString() + "]";
 		}
 
-		if(processType == 2) {
+		if (processType == 2) {
 			res = "IF[" + nodeList.get(0).toString()
 					+ "[" + nodeList.get(1).toString() + "]]";
 
 			//else ifをとりだしつづける
 			LexicalUnit lu;
 			int i = 3, j = 2;
-			while(true) {
+			while (true) {
 				lu = unitList.get(i);
 
-				if(lu.getType() == LexicalType.ELSE) {
+				if (lu.getType() == LexicalType.ELSE) {
 					res += "ELSE[" + nodeList.get(j).toString() + "]";
 					break;
-				}else {
+				} else {
 					res += "ELSEIF[" + nodeList.get(j).toString()
-							+ "[" + nodeList.get(j+1).toString() + "]]";
+							+ "[" + nodeList.get(j + 1).toString() + "]]";
 				}
 				i += 2;
 				j += 2;
@@ -310,11 +311,10 @@ public class IFNode extends Node{
 	public Value getValue() {
 		//if, elseif関係なく、条件文があってたらブロック内を実行して終了
 		//else が来たら、ブロック内を実行して終了
-		String res = null;
 
-		if(processType == 2) {
+		if (processType == 2) {
 			//ifブロック
-			if(nodeList.get(0).getValue().getBValue()) {
+			if (nodeList.get(0).getValue().getBValue()) {
 				nodeList.get(1).getValue();
 				return null;
 			}
@@ -322,15 +322,15 @@ public class IFNode extends Node{
 			//else ifをとりだしつづける
 			LexicalUnit lu;
 			int i = 3, j = 2;
-			while(true) {
+			while (true) {
 				lu = unitList.get(i);
 
-				if(lu.getType() == LexicalType.ELSE) {
+				if (lu.getType() == LexicalType.ELSE) {
 					nodeList.get(j).getValue();
 					break;
-				}else {
-					if(nodeList.get(j).getValue().getBValue()) {
-						nodeList.get(j+1).getValue();
+				} else {
+					if (nodeList.get(j).getValue().getBValue()) {
+						nodeList.get(j + 1).getValue();
 						break;
 					}
 				}

@@ -41,7 +41,6 @@ public class CondNode extends Node {
 
 	public boolean Parse() throws Exception {
 		LexicalUnit lu;
-		Node handler = null;
 
 		lu = env.getInput().get();
 		if (ExprNode.isMatch(lu.getType())) {
@@ -91,17 +90,17 @@ public class CondNode extends Node {
 	public Value getValue() {
 		Boolean flag = null;
 
-		if(conds.get(cond.getType()) == "=") {
+		if (conds.get(cond.getType()) == "=") {
 			flag = expr.getValue().getDValue() == expr2.getValue().getDValue();
-		}else if(conds.get(cond.getType()) == ">") {
+		} else if (conds.get(cond.getType()) == ">") {
 			flag = expr.getValue().getDValue() > expr2.getValue().getDValue();
-		}else if(conds.get(cond.getType()) == "<") {
+		} else if (conds.get(cond.getType()) == "<") {
 			flag = expr.getValue().getDValue() < expr2.getValue().getDValue();
-		}else if(conds.get(cond.getType()) == ">=") {
+		} else if (conds.get(cond.getType()) == ">=") {
 			flag = expr.getValue().getDValue() >= expr2.getValue().getDValue();
-		}else if(conds.get(cond.getType()) == "<=") {
+		} else if (conds.get(cond.getType()) == "<=") {
 			flag = expr.getValue().getDValue() <= expr2.getValue().getDValue();
-		}else if(conds.get(cond.getType()) == "<>") {
+		} else if (conds.get(cond.getType()) == "<>") {
 			flag = expr.getValue().getDValue() != expr2.getValue().getDValue();
 		}
 

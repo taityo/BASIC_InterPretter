@@ -205,7 +205,6 @@ public class LexicalAnalyzerImpl implements LexicalAnalyzer {
 
 		String target = "";
 		LexicalType this_type;
-		ValueType this_value_type;
 
 		while (true) {
 
@@ -238,7 +237,7 @@ public class LexicalAnalyzerImpl implements LexicalAnalyzer {
 				LexicalUnit lu = this.get();
 				if (lu.getType() == LexicalType.IF) {
 					return new LexicalUnit(this.lexical_map.get("ENDIF"));
-				}else {
+				} else {
 					this.unget(new LexicalUnit(this.lexical_map.get("END")));
 					this.unget(lu);
 					return new LexicalUnit(this_type);

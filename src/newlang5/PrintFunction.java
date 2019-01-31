@@ -1,4 +1,4 @@
 package newlang5;
 
-public class PrintFunction extends Function{
+public class PrintFunction extends Function {
 }

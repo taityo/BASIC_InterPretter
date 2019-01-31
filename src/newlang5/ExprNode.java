@@ -269,13 +269,13 @@ public class ExprNode extends Node {
 		//0, 1, 2, 3と値がついている
 		Object num = null;
 
-		if(type == 0) {
+		if (type == 0) {
 			num = v.getSValue();
-		}else if(type == 1) {
+		} else if (type == 1) {
 			num = v.getDValue();
-		}else if(type == 2) {
+		} else if (type == 2) {
 			num = v.getIValue();
-		}else if(type == 3) {
+		} else if (type == 3) {
 			num = v.getBValue();
 		}
 
@@ -285,31 +285,31 @@ public class ExprNode extends Node {
 	private Object calcNum(Object a, Object b, int type, String ope) {
 		Object num = null;
 
-		if(ope.equals("+")) {
-			if(type == 0) {
-				num = (String)a + (String)b;
-			}else if(type == 1) {
-				num = (double)a + (double)b;
-			}else if(type == 2) {
-				num = (int)a + (int)b;
+		if (ope.equals("+")) {
+			if (type == 0) {
+				num = (String) a + (String) b;
+			} else if (type == 1) {
+				num = (double) a + (double) b;
+			} else if (type == 2) {
+				num = (int) a + (int) b;
 			}
-		}else if (ope.equals("-")) {
-			if(type == 1) {
-				num = (double)a - (double)b;
-			}else if(type == 2) {
-				num = (int)a - (int)b;
+		} else if (ope.equals("-")) {
+			if (type == 1) {
+				num = (double) a - (double) b;
+			} else if (type == 2) {
+				num = (int) a - (int) b;
 			}
-		}else if(ope.equals("*")) {
-			if(type == 1) {
-				num = (double)a * (double)b;
-			}else if(type == 2) {
-				num = (int)a * (int)b;
+		} else if (ope.equals("*")) {
+			if (type == 1) {
+				num = (double) a * (double) b;
+			} else if (type == 2) {
+				num = (int) a * (int) b;
 			}
-		}else if(ope.equals("/")) {
-			if(type == 1) {
-				num = (double)a / (double)b;
-			}else if(type == 2) {
-				num = (int)a + (int)b;
+		} else if (ope.equals("/")) {
+			if (type == 1) {
+				num = (double) a / (double) b;
+			} else if (type == 2) {
+				num = (int) a + (int) b;
 			}
 		}
 
@@ -317,14 +317,14 @@ public class ExprNode extends Node {
 	}
 
 	private String objToStr(Object a, int type) {
-		if(type == 0) {
-			return (String)a;
-		}else if(type == 1) {
-			return Double.toString((double)a);
-		}else if(type == 2) {
-			return Integer.toString((int)a);
-		}else {
-			return Boolean.toString((boolean)a);
+		if (type == 0) {
+			return (String) a;
+		} else if (type == 1) {
+			return Double.toString((double) a);
+		} else if (type == 2) {
+			return Integer.toString((int) a);
+		} else {
+			return Boolean.toString((boolean) a);
 		}
 	}
 
@@ -343,19 +343,19 @@ public class ExprNode extends Node {
 				String vname = ((StringNode) first).stringval.getValue().getSValue();
 				Variable v = this.env.getVariable(vname);
 
-				if(v.v.getType() == ValueType.STRING) {
+				if (v.v.getType() == ValueType.STRING) {
 					valueType = 0;
 					type = ValueType.STRING;
 					num = v.v.getSValue();
-				}else if(v.v.getType() == ValueType.DOUBLE) {
+				} else if (v.v.getType() == ValueType.DOUBLE) {
 					valueType = 1;
 					type = ValueType.DOUBLE;
 					num = v.v.getDValue();
-				}else if(v.v.getType() == ValueType.INTEGER) {
+				} else if (v.v.getType() == ValueType.INTEGER) {
 					valueType = 2;
 					type = ValueType.INTEGER;
 					num = v.v.getIValue();
-				}else if(v.v.getType() == ValueType.BOOL) {
+				} else if (v.v.getType() == ValueType.BOOL) {
 					valueType = 3;
 					type = ValueType.BOOL;
 					num = v.v.getBValue();
@@ -385,11 +385,11 @@ public class ExprNode extends Node {
 		}
 
 		if (operand.size() > 1) {
-			num = this.calcNum(num, getNum(operand.get(1).getValue(),valueType),
+			num = this.calcNum(num, getNum(operand.get(1).getValue(), valueType),
 					valueType, ope.get(operata.get(0).getType()));
 		}
 		num = objToStr(num, valueType);
 
-		return new ValueImpl((String)num, type);
+		return new ValueImpl((String) num, type);
 	}
 }

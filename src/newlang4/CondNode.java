@@ -41,7 +41,6 @@ public class CondNode extends Node {
 
 	public boolean Parse() throws Exception {
 		LexicalUnit lu;
-		Node handler = null;
 
 		lu = env.getInput().get();
 		if (ExprNode.isMatch(lu.getType())) {

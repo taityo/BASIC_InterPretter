@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class IntvalNode extends Node{
+public class IntvalNode extends Node {
 
 	static Set<LexicalType> first = new HashSet<LexicalType>(
 			Arrays.asList(LexicalType.INTVAL));
@@ -15,7 +15,7 @@ public class IntvalNode extends Node{
 		type = NodeType.INT_CONSTANT;
 	}
 
-	IntvalNode(int num, Environment e){
+	IntvalNode(int num, Environment e) {
 		this(e);
 		intval = new LexicalUnit(LexicalType.INTVAL, new ValueImpl(Integer.toString(num), ValueType.INTEGER));
 	}
@@ -34,16 +34,16 @@ public class IntvalNode extends Node{
 		LexicalUnit lu;
 		lu = env.getInput().get();
 
-		if(lu.getType() == LexicalType.INTVAL) {
+		if (lu.getType() == LexicalType.INTVAL) {
 			intval = lu;
-		}else {
+		} else {
 			return false;
 		}
 
 		return true;
 	}
 
-	public String toString(){
+	public String toString() {
 		return intval.getValue().getSValue();
 	}
 
@@ -51,4 +51,3 @@ public class IntvalNode extends Node{
 		return intval.getValue();
 	}
 }
-

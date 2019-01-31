@@ -1,21 +1,26 @@
 package newlang5;
 
 public interface Value {
-// À‘•‚·‚×‚«ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-//    public Value(String s);
-//    public Value(int i);
-//    public Value(double d);
-//    public Value(boolean b);
-//    public String get_sValue();
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×‚ï¿½ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	//    public Value(String s);
+	//    public Value(int i);
+	//    public Value(double d);
+	//    public Value(boolean b);
+	//    public String get_sValue();
 	public String getSValue();
-	// ƒXƒgƒŠƒ“ƒOŒ^‚Å’l‚ğæ‚èo‚·B•K—v‚ª‚ ‚ê‚ÎAŒ^•ÏŠ·‚ğs‚¤B
-    public int getIValue();
-    	// ®”Œ^‚Å’l‚ğæ‚èo‚·B•K—v‚ª‚ ‚ê‚ÎAŒ^•ÏŠ·‚ğs‚¤B
-    public double getDValue();
-    	// ¬”“_Œ^‚Å’l‚ğæ‚èo‚·B•K—v‚ª‚ ‚ê‚ÎAŒ^•ÏŠ·‚ğs‚¤B
-    public boolean getBValue();
-    	// ˜_—Œ^‚Å’l‚ğæ‚èo‚·B•K—v‚ª‚ ‚ê‚ÎAŒ^•ÏŠ·‚ğs‚¤B
-    public ValueType getType();
-    public String toString();
-    	// getSValueij‚Æ“¯‚¶B•Ö—˜‚Ì‚½‚ßB
+
+	// ï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½^ï¿½Å’lï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½Bï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎAï¿½^ï¿½ÏŠï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½B
+	public int getIValue();
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½Å’lï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½Bï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎAï¿½^ï¿½ÏŠï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½B
+	public double getDValue();
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½^ï¿½Å’lï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½Bï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎAï¿½^ï¿½ÏŠï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½B
+	public boolean getBValue();
+
+	// ï¿½_ï¿½ï¿½ï¿½^ï¿½Å’lï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½Bï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎAï¿½^ï¿½ÏŠï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½B
+	public ValueType getType();
+
+	public String toString();
+	// getSValueï¿½iï¿½jï¿½Æ“ï¿½ï¿½ï¿½ï¿½Bï¿½Ö—ï¿½ï¿½Ì‚ï¿½ï¿½ßB
 }

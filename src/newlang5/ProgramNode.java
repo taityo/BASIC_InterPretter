@@ -13,7 +13,7 @@ public class ProgramNode extends Node {
 		if (type == LexicalType.NL) {
 			while (true) {
 				lu = env.getInput().get();
-				if(lu.getType() != LexicalType.NL) {
+				if (lu.getType() != LexicalType.NL) {
 					type = lu.getType();
 					env.getInput().unget(lu);
 					break;
@@ -39,7 +39,7 @@ public class ProgramNode extends Node {
 		return stmt_list.toString();
 	}
 
-    public Value getValue() {
+	public Value getValue() {
 		return this.stmt_list.getValue();
-    }
+	}
 }
